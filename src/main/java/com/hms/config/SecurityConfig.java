@@ -20,15 +20,16 @@ public class SecurityConfig {
             HttpSecurity http
     ) throws Exception {
 
-        http.csrf(csrf -> csrf.disable()).authorizeHttpRequests
-                (auth -> auth.requestMatchers
-                        ("/api/v1/users/login",
-                                "/api/v1/users/signup",
-                                "/api/v1/users/signup_propertyowner")
-                        .permitAll()
-                        .requestMatchers("/api/v1/country/addcountry")
-                        .hasAnyRole("OWNER")
-                        .anyRequest().authenticated());
+        http.csrf((csrf -> csrf.disable())).authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+//        http.csrf(csrf -> csrf.disable()).authorizeHttpRequests
+//                (auth -> auth.requestMatchers
+//                        ("/api/v1/users/login",
+//                                "/api/v1/users/signup",
+//                                "/api/v1/users/signup_propertyowner")
+//                        .permitAll()
+//                        .requestMatchers("/api/v1/country/addcountry")
+//                        .hasAnyRole("OWNER")
+//                        .anyRequest().authenticated());
          http.addFilterBefore(jwTfilter, AuthorizationFilter.class);
         return http.build();
     }
