@@ -1,5 +1,6 @@
 package com.hms.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,6 +33,7 @@ public class Property {
 
     @ManyToOne
     @JoinColumn(name = "city_id")
+    @JsonIgnore
     private City city;
 
 }
